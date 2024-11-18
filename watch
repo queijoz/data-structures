@@ -1,0 +1,23 @@
+last_modified=0
+filename=$(echo $file | sed -E 's/\S+\///')
+
+if [ -z "$file" ]; then
+    echo "Please specify what file to watch using file=<file>"
+else
+    while true; do
+        current_modified=$(stat -c %Y "$file.c")
+        if [ "$current_modified" -ne "$last_modified" ]; then
+            last_modified=$current_modified
+
+            dependency_list=""
+            for line in $(cat $file.c | grep -E '^#include "\.\.' | sed -E 's/#include|"//g' | sed 's/\.\./src/g' | sed 's/.h/.c/'); do
+                dependency_list="$dependency_list $line"
+            done
+
+            clear
+            gcc $file.c $dependency_list -o bin/$filename && bin/$filename
+        else
+            sleep 1
+        fi
+    done
+fi

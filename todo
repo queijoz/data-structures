@@ -1,0 +1,11 @@
+[*] Array - Porção fixa de memória alocada
+[*] Vetor - Porção fixa de memória alocada com possibilidade de realocação
+[ ] Lista Encadeada - Coleção de Nodes/Nós que possuem valor e um ponteiro para o próximo Node
+[ ] Lista Duplamente Encadeada - O mesmo que a Lista Encadeada porém com referências para o Node anterior também
+[*] Pilha Array - Porção de memória onde o último elemento adicionado é o primeiro a ser removido
+[*] Pilha Lista Encadeada - Usa Nodes ao invés de alocar tudo em um Array
+[ ] Fila Array - Porção de memória onde o último elemento adicionado é o último a ser removido
+[*] Fila Lista Encadeada - Usa Nodes ao invés de alocar tudo em um Array
+[ ] Hash Table - no idea
+[ ] Mapa - nem me pergunte
+...
