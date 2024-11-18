@@ -1,6 +1,26 @@
 last_modified=0
 filename=$(echo $file | sed -E 's/\S+\///')
 
+getDependenciesFromFile () {
+    dependencies=$( \
+        cat $1 | \
+        grep -E '^#include "\.\.' | \
+        sed -E 's/#include|"//g' | \
+        sed 's/.h/.c/' | \
+        sed 's/\.\./src/g' | \
+        sed 's/src\/src/src/g' | \
+        tr -d '\n' \
+    )
+
+    [ -z "$dependencies" ] || echo "File $1 has the following dependencies: $dependencies"
+
+    for line in $dependencies; do
+        dependency_list+=($line)
+        getDependenciesFromFile $line
+        getDependenciesFromFile $(echo $line | sed 's/\.c$/.h/')
+    done
+}
+
 if [ -z "$file" ]; then
     echo "Please specify what file to watch using file=<file>"
 else
@@ -8,14 +28,12 @@ else
         current_modified=$(stat -c %Y "$file.c")
         if [ "$current_modified" -ne "$last_modified" ]; then
             last_modified=$current_modified
+            dependency_list=()
 
-            dependency_list=""
-            for line in $(cat $file.c | grep -E '^#include "\.\.' | sed -E 's/#include|"//g' | sed 's/\.\./src/g' | sed 's/.h/.c/'); do
-                dependency_list="$dependency_list $line"
-            done
+            getDependenciesFromFile "$file.c"
 
             clear
-            gcc $file.c $dependency_list -o bin/$filename && bin/$filename
+            gcc $file.c $(printf "%s\n" "${dependency_list[@]}" | sort -u | tr '\n' ' ') -o bin/$filename && bin/$filename
         else
             sleep 1
         fi

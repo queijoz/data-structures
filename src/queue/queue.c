@@ -46,27 +46,27 @@ Queue createQueue () {
     return (Queue){.Bottom = NULL, .Top = NULL, .size = 0};
 }
 
-int main () {
+// int main () {
 
-    int value, shift;
-    Queue queue = createQueue();
+//     int value, shift;
+//     Queue queue = createQueue();
 
-    value = 42;
-    Push(&queue, value);
-    Shift(&queue, &shift);
-    printf("expected %d, got %d\n", value, shift);
+//     value = 42;
+//     Push(&queue, value);
+//     Shift(&queue, &shift);
+//     printf("expected %d, got %d\n", value, shift);
 
-    value = 69;
-    Push(&queue, value);
-    Shift(&queue, &shift);
-    printf("expected %d, got %d\n", value, shift);
+//     value = 69;
+//     Push(&queue, value);
+//     Shift(&queue, &shift);
+//     printf("expected %d, got %d\n", value, shift);
 
-    Push(&queue, 1);
-    Push(&queue, 2);
-    Push(&queue, 3);
-    Push(&queue, 4);
-    Flush(&queue);
-    printf("expected %d, got %d\n", 0, queue.size);
+//     Push(&queue, 1);
+//     Push(&queue, 2);
+//     Push(&queue, 3);
+//     Push(&queue, 4);
+//     Flush(&queue);
+//     printf("expected %d, got %d\n", 0, queue.size);
 
-    return 0;
-}
+//     return 0;
+// }
