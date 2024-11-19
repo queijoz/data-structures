@@ -8,7 +8,7 @@ int main() {
     Array array = CreateArray(totalTests);
 
     array.Set(&array, 0, getIntVariant(420));
-    array.Set(&array, size, getIntVariant(69));
+    array.Set(&array, size-1, getIntVariant(69));
 
     Test tests[] = {
         {
