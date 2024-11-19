@@ -18,6 +18,13 @@ void printTest (Test* test) {
 
     printf("TEST NAME: %s\n", test->Name);
     printf("STATUS: %s\n", buffer);
+    if (test->Status == Failed) {
+        printf("EXPECTED: ");
+        printVariant(test->Expected);
+        printf(" | GOT: ");
+        printVariant(test->Received);
+        printf("\n");
+    }
 
     free(buffer);
 }

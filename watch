@@ -1,3 +1,7 @@
+#! /bin/bash
+
+file=$(echo $file | sed 's/\.c$//')
+
 last_modified=0
 filename=$(echo $file | sed -E 's/\S+\///')
 

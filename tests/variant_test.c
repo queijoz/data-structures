@@ -2,6 +2,8 @@
 
 int main() {
 
+    int totalTests = 4;
+
     Test tests[] = {
         {
             .Name = "Test Int Type",
@@ -25,5 +27,5 @@ int main() {
         }
     };
 
-    return test(tests, 4);
+    return test(tests, totalTests);
 }
